@@ -1,2 +1,3 @@
 # git_image
-gitPic
+
+保存图片的分支
