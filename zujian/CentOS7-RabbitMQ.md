@@ -27,7 +27,7 @@ AMQP：Advanced Message Queue，高级消息队列协议。他是应用层协议
 
 项目结构图：（直接引用百度百科的）
 
-![](http://oy09glbzm.bkt.clouddn.com/18-1-26/27555791.jpg)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/Rabbitmq%E7%BB%93%E6%9E%84.png)
 
 概念说明：
 
@@ -228,8 +228,6 @@ rabbitmq-plugins enable rabbitmq_management
 
 在浏览器中输入ip:15672
 
-![](http://oy09glbzm.bkt.clouddn.com/18-1-26/57199153.jpg-blog)
-
 在网上看到有人说默认的账号密码是guest，但是该账号只能通过localhost登录。所以需要配置一个用户并设置权限。
 
 1. 添加用户
@@ -252,7 +250,7 @@ rabbitmqctl set_user_tags [username] administrator
 
 下面就可以使用刚添加的用户登录了。可以在该页面进行RabbitMQ的管理，包括用户的设置。
 
-![](http://oy09glbzm.bkt.clouddn.com/18-1-26/36041742.jpg-blog)
+
 
 ## 安装报错
 
@@ -266,7 +264,7 @@ rabbitmqctl set_user_tags [username] administrator
 
 - odbc : ODBC library - link check failed
 
-  ![](http://oy09glbzm.bkt.clouddn.com/18-1-26/99491906.jpg-blog)
+  ![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103103950.png)
 
   类似这样的错误，我们只需要关注APPLICATIONS DISABLED部分的提示信息，如这里就是缺少odbc，使用命令安装即可
 
@@ -313,7 +311,7 @@ rabbitmqctl -n rabbit_1 status
 
 如下集群配置完毕
 
-![](http://oy09glbzm.bkt.clouddn.com/18-1-26/62559007.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103104025.png)
 
 ## 多机多节点配置
 

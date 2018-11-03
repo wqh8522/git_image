@@ -14,9 +14,9 @@ IMAP是Internet Message Access Protocol的缩写，顾名思义，主要提供�
 ## 前期准备 ##
 如果是使用像QQ邮箱、163邮箱、126邮箱等这种普通的邮箱，需要先开启POP3/SMTP/IMAP服务，并且获取授权。如果是企业邮箱，可以直接使用。这里以163邮箱为例。
 
-![](http://i.imgur.com/5fMcgQh.png)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103102623.png)
 先查看是否开启服务
-![](http://i.imgur.com/YU0igMq.png)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103102608.png)
 开启并设置客户端授权码，这个很重要。如果是qq邮箱，需要发短信配置
 
 ## jar包 ##

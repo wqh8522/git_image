@@ -24,7 +24,7 @@ group by o.id,o.name,to_char(a.create_date,'yyyy')
 
 这里就是将创建时间格式化为年形式，按照单位id分组，查询出提交的数量。
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-21/15651356.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102925.png)
 
 ## 按月统计
 
@@ -42,7 +42,7 @@ left join sys_office o on o.id = u.office_id
 group by o.id,o.name,to_char(a.create_date,'yyyy-MM')
 ```
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-21/25054752.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102940.png)
 
 ## 按周统计
 
@@ -64,7 +64,7 @@ group by o.id,o.name,to_char(a.create_date,'ww')
 
 这里的`ww`是获取该日期的在年中的第几周。
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-21/75838951.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103103006.png)
 
 ### 按自然周的日期统计
 

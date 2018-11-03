@@ -313,7 +313,7 @@ webservice地址=tomcat地址+cxf servlet的路径+/rest
 
 ```
 这里rest服务是生成wadl说明文档，查看wadl在地址栏输入：http://localhost:8080/webcxf/ws/rest?_wadl
-![](http://i.imgur.com/JOt5ubZ.png)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103103607.png)
 这里能看到一些发布的信息，然后在地址栏中请求发布的服务：
 http://localhost:8080/webcxf/ws/rest/student/query/1323
 

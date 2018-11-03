@@ -20,7 +20,7 @@ row_number() over(partition by  col1 ORDER BY col2 ASC )
 
 我将项目的数据库表进行改造并插入数据
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-14/14933320.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/createtable.png)
 
 ```sql
 -- ----------------------------
@@ -67,7 +67,7 @@ ALTER TABLE "ZXZX" ADD PRIMARY KEY ("ID");
 
 ```
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-14/33929690.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102758.png)
 
 ## 数据查询
 
@@ -88,11 +88,11 @@ FROM zxzx
 WHERE user_id = '001' AND is_start !='1'
 ```
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-15/57520084.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102823.png)
 
 - 接着上面的查询，可以看出排序分组之后的数据都有一个rn编号，接着将rn为一取出即可：
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-15/94742878.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102836.png)
 
 - 然后需要查询出所有的问的记录。将上面作为子查询，使用内连接并用consult_id字段连接。
 
@@ -130,7 +130,7 @@ where w.is_start = '1'
 
 - 最后查询结果
 
-![](http://oy09glbzm.bkt.clouddn.com/18-3-16/35936413.jpg-blog)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/oracle/20181103102850.png)
 
 ##  知识点
 

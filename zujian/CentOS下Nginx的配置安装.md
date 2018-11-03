@@ -32,7 +32,7 @@ PCRE的作用是使nginx支持Rewrite功能。[https://sourceforge.net/projects/
 [root@localhost pcre2-10.30]# make install
 ```
 4. 查看版本
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/3951804.jpg)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103104054.png)
 ### 安装nginx ###
 如果nginx还需支持SSL则还需要安装http_ssl_module模块，这里就不介绍了。
 下载，[http://nginx.org/download/](http://nginx.org/download/)选择对应的版本，这里使用1.9.0
@@ -48,19 +48,19 @@ PCRE的作用是使nginx支持Rewrite功能。[https://sourceforge.net/projects/
 [root@localhost nginx-1.9.0]# make install
 ```
 查看nginx版本
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/14426767.jpg)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103104108.png)
 配置文件路径：`/usr/local/webserver/nginx/conf/nginx.conf`，使用vim编辑配置文件，添加location：
 
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/30992423.jpg?imageView2/0/q/75|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/300/fill/IzJDMUJFRQ==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103104153.png)
+
+
 
 ### 启动测试 ###
 在测试之前先运行一个tomcat服务器，使用8080端口：
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/92166265.jpg?imageView2/0/q/75|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/300/fill/IzJDMUJFRQ==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+
 然后启动nginx服务器：
 ```
 [root@localhost apache-tomcat-8.0.48]# /usr/local/webserver/nginx/sbin/nginx 
 ```
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/85044529.jpg?imageView2/0/q/75|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/300/fill/IzJDMUJFRQ==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
-上面我们配置了转发`/test`:
 
-![](http://oy09glbzm.bkt.clouddn.com/17-12-29/95715631.jpg?imageView2/0/q/75|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/300/fill/IzJDMUJFRQ==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+上面我们配置了转发`/test`:

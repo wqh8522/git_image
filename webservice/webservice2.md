@@ -29,7 +29,7 @@ SOAP:简单对象访问协议（Simple Object Access Protocal），是一种简�
 - SOAP 消息必须使用 SOAP Encoding 命名空间
 - SOAP 消息不能包含 DTD 引用
 - SOAP 消息不能包含 XML 处理指令
- 
+
 ##### 基本结构 #####
 ```java
 <?xml version="1.0"?>
@@ -71,7 +71,7 @@ WSDL 是基于 XML 的用于描述Web Service及其函数、参数和返回值�
 
 #### wsdl说明书阅读 ####
 从下往上读，先找到服务视图，通过binging找到protType，找到了protType就找到了我们要调用的webservice方法。
-![](http://i.imgur.com/Oy0c8Ll.png)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/Oy0c8Ll.png)
 
 ### UDDI ###
 UDDI 是一种目录服务，企业可以使用它对 Web services 进行注册和搜索。
@@ -94,7 +94,7 @@ UDDI 是一个独立于平台的框架，用于通过使用 Internet 来描述�
 - serviceName：服务名称
 - endpointInterface：SEI接口地址，如果一个服务类实现了多个接口，只需要发布一个接口的方法，可通过此注解指定要发布服务的接口。
 
-###	@WebMethod ###
+	##	@WebMethod ###
 @WebMethod-定义方法，在公开方法上边，可选参数：
 - operationName：方法名
 - exclude：设置为true表示此方法不是webservice方法，反之则表示webservice方法

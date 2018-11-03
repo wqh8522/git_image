@@ -17,14 +17,13 @@ FastDFS是由淘宝的余庆先生所开发，是一个轻量级、高性能的�
 -  <font color="red">meta data：</font>文件相关属性，键值对（Key Value Pair）方式，如：width=1024,heigth=768
 ## FastDFS结构 ##
 ### 系统架构图 ###
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/68974025.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/20181103104324.png)
 部署结构
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/61576190.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/redit/61576190.jpg)
 ### 文件上传下载 ###
 **上传流程**
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/23619298.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
-**下载流程**
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/82524766.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103104534.png)
+
 ## 系统的部署 ##
 ### 环境介绍 ###
 操作系统：centerOS 7.3 需要有gcc,安装命令
@@ -61,7 +60,7 @@ unzip V5.11.zip
 
 ```
 查看fdfs的相关命令,fastDFS命令目录：/usr/bin
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/4190816.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103104645.png)
 ## 配置文件介绍 ##
 FastDFS的配置文件在/etc/fdfs下面，默认都是以.sample为后缀的，这个后缀要去掉，最好就是先复制一份出来。配置文件大部分是保持默认的，要修改的地方不多。
 ### tracker.conf配置介绍 ###
@@ -352,7 +351,7 @@ mkdir  /data/fastdfs/tracker
 ```
 修改配置文件
 `vim /etc/fdfs/tracker.conf`
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/80552480.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103104713.png)
 启动tracker
 ```java
 
@@ -367,10 +366,7 @@ fdfs_trackerd /etc/fdfs/tracker.conf restart
 ### 配置启动storage ###
 按照前面的介绍，storage应该安装在其他服务器节点上，并且可以添加多个groups。这里为了方便，直接跟Tracker在同一台服务器，并且就不安装多个了。
 修storage.conf配置文件
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/63365541.jpg)
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/12855148.jpg)
-启动stroge
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/58576437.jpg)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103104833.png)
 
 ## 测试 ##
 直接下载官方的测试demo：[https://github.com/happyfish100/fastdfs-client-java](https://github.com/happyfish100/fastdfs-client-java)
@@ -382,11 +378,8 @@ network_timeout = 20
 tracker_server=192.168.18.129:22122
 ```
 需要运行的类，先添加两个参数：一个是配置文件，一个是要上传文件。
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/33260434.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/20181103104948.png)
 
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/87962066.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
-
-![](http://oy09glbzm.bkt.clouddn.com/17-12-27/22721002.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
 点击运行即可，运行结果
 ![](http://oy09glbzm.bkt.clouddn.com/17-12-27/58813378.jpg?imageView2/0/q/100|watermark/2/text/d2FucWhibG9nLnRvcA==/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)
 ----------
