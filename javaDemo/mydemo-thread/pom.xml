@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>mydemo-thread</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>mydemo-thread</name>
