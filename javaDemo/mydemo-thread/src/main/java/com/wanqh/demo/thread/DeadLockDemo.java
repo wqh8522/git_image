@@ -5,17 +5,17 @@ public class DeadLockDemo {
     private static String A = "A";
     private static String B = "B";
 
-    private  void deadLock(){
+    private void deadLock() {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (A){
+                synchronized (A) {
                     try {
                         Thread.currentThread().sleep(2000);
-                    }catch (InterruptedException e){
-
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    synchronized (B){
+                    synchronized (B) {
                         System.out.println("t1");
                     }
                 }
@@ -24,8 +24,8 @@ public class DeadLockDemo {
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (B){
-                    synchronized (A){
+                synchronized (B) {
+                    synchronized (A) {
                         System.out.println("t2");
                     }
                 }
