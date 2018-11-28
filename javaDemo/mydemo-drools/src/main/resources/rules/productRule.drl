@@ -1,6 +1,10 @@
 //package rules
 
 import com.wqh.demo.drools.pojo.Product
+import java.math.BigDecimal
+import java.util.List
+
+global List list
 
 rule Offer4Diamond
     when
@@ -14,3 +18,20 @@ rule Offer4Gold
     then
         productObject.setDiscount(25);
      end
+
+rule testInsert
+    salience 1
+    when
+        eval(true)
+    then
+
+     end
+
+rule rule1
+    dialect "java"
+when
+    $bd : BigDecimal()
+    eval($bd.compareTo(BigDecimal.ZERO) > 0)
+then
+    list.add($bd);
+ end

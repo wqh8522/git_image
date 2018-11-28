@@ -1,3 +1,4 @@
+/*
 package com.wqh.demo.drools.service;
 
 
@@ -59,3 +60,4 @@ public class Drools5Test {
         drools5Test.executeDrools();
     }
 }
+*/
