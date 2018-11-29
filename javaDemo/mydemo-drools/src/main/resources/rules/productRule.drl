@@ -1,4 +1,4 @@
-//package rules
+package rules
 
 import com.wqh.demo.drools.pojo.Product
 import java.math.BigDecimal
@@ -19,19 +19,19 @@ rule Offer4Gold
         productObject.setDiscount(25);
      end
 
-rule testInsert
-    salience 1
-    when
-        eval(true)
-    then
-
-     end
-
-rule rule1
-    dialect "java"
-when
-    $bd : BigDecimal()
-    eval($bd.compareTo(BigDecimal.ZERO) > 0)
-then
-    list.add($bd);
- end
+//rule testInsert
+//    salience 1
+//    when
+//        eval(true)
+//    then
+//
+//     end
+//
+//rule rule1
+//    dialect "java"
+//when
+//    $bd : BigDecimal()
+//    eval($bd.compareTo(BigDecimal.ZERO) > 0)
+//then
+//    list.add($bd);
+// end

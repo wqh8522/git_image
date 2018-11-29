@@ -35,4 +35,12 @@ public class Product {
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "type='" + type + '\'' +
+                ", discount=" + discount +
+                '}';
+    }
 }

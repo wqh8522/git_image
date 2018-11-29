@@ -1,29 +1,34 @@
 package com.wqh.demo.drools.service;
 
+import com.wqh.demo.drools.pojo.Product;
 import org.junit.Test;
-import org.kie.internal.builder.KnowledgeBuilder;
-import org.kie.internal.builder.KnowledgeBuilderFactory;
+import org.kie.api.KieBase;
+import org.kie.api.KieServices;
+import org.kie.api.definition.KiePackage;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 public class Drools7TestOne {
 
     @Test
     public void testOne()throws Exception{
-//        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-//        kbuilder.add(ResourceFactory.newClassPathResource("rules/produceRule.drl",this.getClass()),ResourceType.DRL);
-//        if (kbuilder.hasErrors()){
-//            System.out.println(kbuilder.getErrors().toString());
-//        }
-//        assert (kbuilder.hasErrors());
-//
-//        InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-//
-////        kbase.addPackage(kbuilder.getKnowledgePackages())
+        //KieServices：通过该接口的方法可以访问KIE关于构建和运行的相关对象
+        KieServices kieServices = KieServices.Factory.get();
+        //KieContainer：一个KieBase的容器，提供了获取KieBase的方法和创建KieSession的方法。
+        KieContainer kieContainer = kieServices.getKieClasspathContainer();
+        //KieSession：一个跟Drools引擎打交道的会话，基于KieBase创建。
+        //kmodule.xml :
+        KieSession kieSession = kieContainer.newKieSession("ksession-rule");
 
-//        KieServices ks = KieServices.Factory.get();
-//        KieContainer kieContainer = ks.getKieClasspathContainer();
-//
-//        kieContainer.newKieSession()
-//        KnowledgeBuilder： 在业务代码当中收集已经编译的规则代码，然后对这些规则文件进行编译，最终产生一批编译好的规则包（KnowledgePackage）给其他应用程序使用
-        KnowledgeBuilder knowledgeBuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        Product product = new Product();
+        product.setType(Product.GOLD);
+
+        kieSession.insert(product);
+        //触发规则数
+        int i = kieSession.fireAllRules();
+
+        System.out.println(i);
+        System.out.println(product);
     }
+
 }
