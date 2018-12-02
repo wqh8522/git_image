@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <!--package:为物理路径-->
+    <kbase name="rules" packages="rules">
+        <ksession name="ksession-rule"/>
+    </kbase>
+</kmodule>

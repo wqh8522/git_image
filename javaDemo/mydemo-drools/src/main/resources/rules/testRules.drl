@@ -1,0 +1,79 @@
+package com.rules;
+
+import com.wqh.demo.drools.pojo.Product
+
+
+/**==========================================================
+no-loop:定义当前规则是否不允许多次循环执行，默认为false：运行多次循环执行。
+        避免Fact被修改或调用了insert、retract、update之类的方法而导致规则再次激活执行
+        默认情况下在规则里面调用update  insert  retract 方法会重新触发规则，可以将 no-loop设置为true
+=============================================================**/
+/*rule rule1
+    no-loop true
+    when
+        obj: Product(discount > 0)
+    then
+        obj.setDiscount(obj.getDiscount() +1);
+        System.out.println("新的商品折扣：" + obj.getDiscount());
+        update(obj)
+    end
+
+/**==========================================================
+lock-on-active:设置为true  避免因为某些Fact的修改而使已经被执行过的规则再次被激活执行。
+               lock-on-active是no-loop的增强版属性
+               它主要作用在使用ruleflow-group属性或agenda-group属性的时候
+=============================================================**/
+/*
+rule  rule2
+    lock-on-active true //设置为true
+    when
+       obj: Product( discount > 1)
+    then
+        System.out.println("触发第二条规则："+ obj.getDiscount());
+    end*/
+
+/**==========================================================
+ruleflow-group:划分规则组,需要在java代码中指定调用那个group，否则规则将不会触发规则
+=============================================================**/
+/*
+rule ruleflow_group1
+    ruleflow-group "group1"  //划分规则组,需要在java代码中指定调用那个group，否则规则将永远不会触发
+    when
+    then
+        System.out.println("第一条规则触发");
+    end
+
+rule ruleflow_group2
+    ruleflow-group "group1"
+    when
+    then
+        System.out.println("第二条规则触发");
+    end*/
+
+/**==========================================================
+salience:指定规则执行的顺序，数值越大优先级越高，可以为负数。
+         默认为0，若不设置，则随机执行,
+         可以设置动态salience，使用绑定变量表达式作为salience的值
+=============================================================**/
+/*
+rule salience1
+    salience 1
+    when
+    then
+        System.out.println("第一条规则触发");
+    end
+
+rule salience2
+    salience 2 //指定规则执行的顺序，数值越大优先级越高，可以为负数。默认为0，若不设置，则随机执行
+    when
+    then
+        System.out.println("第二条规则触发");
+    end
+
+rule salienceFact
+    salience sal //动态salience，使用绑定变量表达式作为salience的值
+    when
+        Product(sal:discount) //将product的discount作为salience的值
+    then
+        System.out.println("使用Fact的值设置绑定salience");
+    end*/

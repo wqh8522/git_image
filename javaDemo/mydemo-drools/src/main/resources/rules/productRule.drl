@@ -1,9 +1,10 @@
-package rules
+/*
+package com.rules
 
 import com.wqh.demo.drools.pojo.Product
 import java.math.BigDecimal
 import java.util.List
-
+import static com.wqh.demo.drools.utils.DroolsStringUtils.isEmpty
 global List list
 
 rule Offer4Diamond
@@ -17,6 +18,23 @@ rule Offer4Gold
         productObject : Product(type == Product.GOLD)
     then
         productObject.setDiscount(25);
+     end
+
+rule testStatic
+    when
+        eval(isEmpty(""))
+    then
+        System.out.println("");
+     end
+
+rule testNoLoop
+    no-loop true
+    when
+        productObject :  Product(discount > 0)
+     then
+        productObject.setDiscount(productObject.getDiscount() + 1);
+        System.out.println(productObject.getDiscount());
+        update(productObject)  //默认情况下在规则里面调用update  insert  retract 方法会重新触发规则，可以将 no-loop设置为true
      end
 
 //rule testInsert
@@ -34,4 +52,4 @@ rule Offer4Gold
 //    eval($bd.compareTo(BigDecimal.ZERO) > 0)
 //then
 //    list.add($bd);
-// end
+// end*/
