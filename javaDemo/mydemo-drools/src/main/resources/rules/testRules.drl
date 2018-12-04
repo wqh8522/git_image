@@ -1,5 +1,6 @@
 package com.rules;
 
+dialect "java"   //该属性用来定义规则（LHS、RHS）当中要使用的语言类型，可选值为“java”或“mvel”。默认为java
 import com.wqh.demo.drools.pojo.Product
 
 
@@ -35,16 +36,16 @@ rule  rule2
 /**==========================================================
 ruleflow-group:划分规则组,需要在java代码中指定调用那个group，否则规则将不会触发规则
 =============================================================**/
-/*
-rule ruleflow_group1
-    ruleflow-group "group1"  //划分规则组,需要在java代码中指定调用那个group，否则规则将不会触发
+/*rule ruleflow_group1
+//    ruleflow-group "group2"  //划分规则组,在代码中使用 KieSession.getAgenda().getAgendaGroup("group1").setFocus()使改group获得焦点;
+    agenda-group "grooup3"
     when
     then
         System.out.println("第一条规则触发");
     end
 
 rule ruleflow_group2
-    ruleflow-group "group1"
+//    ruleflow-group "group2"
     when
     then
         System.out.println("第二条规则触发");
@@ -77,3 +78,122 @@ rule salienceFact
     then
         System.out.println("使用Fact的值设置绑定salience");
     end*/
+
+
+/**==========================================================
+agenda-group: 规则在没有调用fireAllRules方法之前，所有的规则和插入的Fact对象都存放在一个Agenda表的对象当中，该表每一个规则
+              及其匹配的业务数据叫做Activation。规则执行就是依次执行这些Activation。
+              Agenda Group是用来在Agenda基础上对规则进行再次分组，可通过为规则添加agenda-group属性来实现。
+=============================================================**/
+/*
+rule agenda_group1
+    agenda-group "agenda_group2"
+    when
+    then
+        System.out.println("第一条规则触发");
+    end
+
+rule agenda_group2
+    agenda-group "agenda_group2"
+    when
+    then
+        System.out.println("第二条规则触发");
+    end
+*/
+
+/**==========================================================
+auto-focu：设置该规则是否自动获取焦点，默认为fale。可以配合agenda-group使用,是该agenda-group下的规则自动获取焦点
+=============================================================**/
+/*rule agenda_group1
+    agenda-group "agenda_group2"
+    auto-focus true
+    when
+    then
+        System.out.println("第一条规则触发");
+    end
+
+rule agenda_group2
+    agenda-group "agenda_group2"
+    when
+    then
+        System.out.println("第二条规则触发");
+    end*/
+
+/*
+rule test
+    when
+    then
+        System.out.println("测试AgendaFilter");
+    end*/
+
+/**==========================================================
+activation-group：改属性将若干个规则分成一个组，统一命名。该组内的规则只要有一个执行，其他规则都不再执行。
+                  也被称为异或（Xor）组，但技术上并不是这样实现的
+                  可以使用类似salience的属性来指定规则的优先级
+=============================================================**/
+/*rule "activation-group1"
+    activation-group "activation-group1"
+    when
+    then
+        System.out.println("第一条规则触发");
+    end
+
+rule "activation-group2"
+    activation-group  "activation-group1"
+    when
+    then
+        System.out.println("第二条规则触发");
+    end*/
+
+/**==========================================================
+date-effective：指定规则执行的时间，只有当当前操作系统的时间大于等于date-effective设置的时间规则才会被触发执行。
+                该属性的值是一个日期型的字符串。默认的格式：dd-MMM-yyyy:03-Dec-2018，中文操作系统中可以设置中文：03-十二月-2018
+                可以使用 System.setProperty("drools.dateformat","yyyy-MM-dd")在获取KieSession之前设置时间格式，
+date-expires: 设置过期时间，如果设置时间大于当前系统时间，则执行规则，否则不执行。
+=============================================================**/
+/*
+rule "date"
+//    date-effective "03-十二月-2018"
+//    date-effective "03-十二月-2018"
+//    date-effective "2018-12-01"
+    date-expires "2018-12-04"
+    when
+    then
+        System.out.println("规则时间到");
+end
+*/
+
+
+/**==========================================================
+duration：长整型，单位为毫秒；指定规则在指定的时间之后在另外一个线程触发。如果为0，则立即执行。已被废弃
+enabled: 设置规则是否可用
+=============================================================**/
+/*
+rule "testEnable"
+    enabled true
+    when
+    then
+        System.out.println("规则是否可以执行");
+end
+rule "testDuration"
+    duration 5000
+    when
+    then
+        System.out.println("设置执行时间");
+end*/
+
+/**==========================================================
+timer: 设置定时器。基于interval（间隔）和cron的定时器（timer），
+        timer ( int: <initial delay> <repeat interval>? )
+        timer ( int: 30s )
+        timer ( int: 30s 5m )
+
+        timer ( cron: <cron expression> )
+        timer ( cron:* 0/15 * * * ? )
+=============================================================**/
+rule "testTimer"
+    timer (cron:0/1 * * * * ?)
+    when
+    then
+        System.out.println("定时执行的规则");
+end
