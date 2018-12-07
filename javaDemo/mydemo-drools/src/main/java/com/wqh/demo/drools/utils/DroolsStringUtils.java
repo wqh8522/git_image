@@ -1,4 +1,4 @@
-package com.wqh.demo.drools.utils;
+/*package com.wqh.demo.drools.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -8,3 +8,4 @@ public class DroolsStringUtils {
         return StringUtils.isEmpty(str);
     }
 }
+*/

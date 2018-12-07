@@ -78,6 +78,11 @@
             <artifactId>drools-core</artifactId>
             <version>${drools.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-bpmn2</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

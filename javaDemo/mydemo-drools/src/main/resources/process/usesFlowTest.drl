@@ -1,0 +1,72 @@
+package com.process
+
+import com.wqh.demo.drools.pojo.Score
+
+//no-loop true //设置不重复执行
+
+
+rule "name1"
+	ruleflow-group  "name"
+    when
+    	score:Score(name=="wqh")
+    then
+    	System.out.println(score.getName());
+end
+
+rule "name2"
+	ruleflow-group  "name"
+    when
+    	score:Score(name!="wqh")
+    then
+    	System.out.println(score.getName());
+end
+
+
+
+rule "perfect"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==100)
+    then
+        score.setDesc("perfect");
+		update(score);
+end
+
+rule "excellent"
+	ruleflow-group "score"
+    when
+       	score:Score(score>=90,score<100)
+    then
+        score.setDesc("excellent");
+		update(score);
+
+end
+
+rule "good"
+	ruleflow-group "score"
+    when
+       	score:Score(score>=80,score<90)
+    then
+        score.setDesc("good");
+		update(score);
+
+end
+
+
+rule "pass"
+	ruleflow-group "score"
+    when
+       	score:Score(score>=60,score<80)
+    then
+        score.setDesc("pass");
+		update(score);
+end
+
+rule "noPass"
+	ruleflow-group "score"
+    when
+       	score:Score(score<60)
+    then
+        score.setDesc("noPass");
+		update(score);
+end
