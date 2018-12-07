@@ -4,22 +4,22 @@ import com.wqh.demo.drools.pojo.Score
 
 //no-loop true //设置不重复执行
 
-
 rule "name1"
 	ruleflow-group  "name"
     when
     	score:Score(name=="wqh")
     then
-    	System.out.println(score.getName());
+    	System.out.println("================姓名wqh触发规则");
 end
 
 rule "name2"
 	ruleflow-group  "name"
     when
-    	score:Score(name!="wqh")
+    	score:Score(name=="wqh11")
     then
-    	System.out.println(score.getName());
+    	System.out.println("================姓名wqh11规则");
 end
+
 
 
 

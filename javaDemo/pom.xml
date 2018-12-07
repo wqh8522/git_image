@@ -20,6 +20,7 @@
         <module>mydemo-thread</module>
         <module>mydemo-drools</module>
         <module>mydemo-drools-springboot</module>
+        <module>mydemo-drools-jbpm</module>
     </modules>
 
 </project>

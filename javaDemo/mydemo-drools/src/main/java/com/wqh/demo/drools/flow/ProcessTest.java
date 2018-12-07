@@ -69,7 +69,7 @@ public class ProcessTest {
 		KieSession kieSession = kieContainer.newKieSession();
 
 		Score score = new Score();
-		score.setName("wqh");
+		score.setName("wqh11");
 		score.setScore(80);
 		kieSession.insert(score);
 		kieSession.startProcess("drools_flow_no1");
