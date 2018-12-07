@@ -1,0 +1,23 @@
+//created on: 2018-12-7
+package com.name
+
+
+import com.wqh.demo.drools.pojo.Score
+
+
+rule "name1"
+	ruleflow-group  "name"
+    when
+    	score:Score(name=="wqh")
+    then
+    	System.out.println("================姓名wqh触发规则");
+end
+
+rule "name2"
+	ruleflow-group  "name"
+    when
+    	score:Score(name=="wqh11")
+    then
+    	System.out.println("================姓名wqh11规则");
+end
+
