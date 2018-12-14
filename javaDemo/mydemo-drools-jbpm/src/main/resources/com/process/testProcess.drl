@@ -1,0 +1,110 @@
+//created on: 2018-12-10
+package com.test
+
+import com.wqh.drools.jbpm.pojo.Users
+import com.wqh.drools.jbpm.pojo.Score
+import com.wqh.drools.jbpm.pojo.CreditObject
+import com.wqh.drools.jbpm.pojo.Credit
+
+query "list all credits from working memory"
+credit : Credit()
+end
+
+rule "user111"
+	ruleflow-group "user"
+    when
+       $user:Users(name == "wqh111")
+    then
+        System.out.println($user.getName()+"====================");
+        Score score = new Score();
+        score.setName($user.getName());
+        score.setScore(10);
+        insert(score);
+end
+
+rule "user222"
+	ruleflow-group "user"
+    when
+       $user:Users(name == "wqh222")
+    then
+        Score score = new Score();
+        score.setName($user.getName());
+        score.setScore(50);
+        insert(score);
+end
+
+rule "user333"
+ 	ruleflow-group "user"
+     when
+        $user:Users(name == "wqh333")
+     then
+         Score score = new Score();
+         score.setName($user.getName());
+         score.setScore(100);
+         insert(score);
+ end
+
+rule "score111"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==10)
+    then
+  		 System.out.println(score.getScore()+"====================");
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"10");
+    	creditObject.setValue("10");
+    	insert(creditObject);
+end
+
+rule "score222"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==50)
+    then
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"50");
+    	creditObject.setValue("50");
+    	insert(creditObject);
+end
+
+
+rule "score333"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==100)
+    then
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"100");
+    	creditObject.setValue("100");
+    	insert(creditObject);
+end
+
+rule "creditObject111"
+    ruleflow-group "creditObject"
+    when
+        creditObject:CreditObject(value == "10")
+    then
+   		System.out.println(creditObject.getUuid()+"========creditObject:CreditObject===========");
+        Credit credit = new Credit(creditObject.getUuid(),creditObject.getValue());
+        insert(credit);
+end
+
+
+rule "creditObject222"
+    ruleflow-group "creditObject"
+    when
+        creditObject:CreditObject(value == "50")
+    then
+        Credit credit = new Credit(creditObject.getUuid(),creditObject.getValue());
+        insert(credit);
+end
+
+rule "creditObject333"
+    ruleflow-group "creditObject"
+    when
+        creditObject:CreditObject(value == "100")
+    then
+        Credit credit = new Credit(creditObject.getUuid(),creditObject.getValue());
+        insert(credit);
+end
+

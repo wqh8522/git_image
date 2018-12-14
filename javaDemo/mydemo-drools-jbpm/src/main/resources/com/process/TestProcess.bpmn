@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="com.process.TestProcess" name="com.test" tns:packageName="com.test" >
+
+    <extensionElements>
+     <tns:import name="com.wqh.drools.jbpm.pojo.Score" />
+     <tns:import name="org.kie.api.runtime.process.CaseAssignment" />
+     <tns:import name="org.kie.api.runtime.process.CaseData" />
+     <tns:import name="com.wqh.drools.jbpm.pojo.Users" />
+    </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEvent_1" name="StartProcess"  isInterrupting="true">
+    </startEvent>
+    <businessRuleTask id="80bdb4b6-f70d-4dd7-b12b-44843b19facc" name="User" g:ruleFlowGroup="user" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+    <businessRuleTask id="7d406704-2e90-48ff-90b6-62dcbd19d08b" name="Score" g:ruleFlowGroup="score" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+    <endEvent id="fe1701e2-464b-4774-9267-3761d44c478d" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <businessRuleTask id="b2aaeaa7-b777-4a37-a592-fc9265d7d33a" name="CreditObject" g:ruleFlowGroup="creditObject" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+
+    <!-- connections -->
+    <sequenceFlow id="StartEvent_1-80bdb4b6-f70d-4dd7-b12b-44843b19facc" sourceRef="StartEvent_1" targetRef="80bdb4b6-f70d-4dd7-b12b-44843b19facc" />
+    <sequenceFlow id="80bdb4b6-f70d-4dd7-b12b-44843b19facc-7d406704-2e90-48ff-90b6-62dcbd19d08b" sourceRef="80bdb4b6-f70d-4dd7-b12b-44843b19facc" targetRef="7d406704-2e90-48ff-90b6-62dcbd19d08b" />
+    <sequenceFlow id="b2aaeaa7-b777-4a37-a592-fc9265d7d33a-fe1701e2-464b-4774-9267-3761d44c478d" sourceRef="b2aaeaa7-b777-4a37-a592-fc9265d7d33a" targetRef="fe1701e2-464b-4774-9267-3761d44c478d" />
+    <sequenceFlow id="7d406704-2e90-48ff-90b6-62dcbd19d08b-b2aaeaa7-b777-4a37-a592-fc9265d7d33a" sourceRef="7d406704-2e90-48ff-90b6-62dcbd19d08b" targetRef="b2aaeaa7-b777-4a37-a592-fc9265d7d33a" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.process.TestProcess" >
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" >
+        <dc:Bounds x="72" y="180" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="80bdb4b6-f70d-4dd7-b12b-44843b19facc" >
+        <dc:Bounds x="180" y="181" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="7d406704-2e90-48ff-90b6-62dcbd19d08b" >
+        <dc:Bounds x="336" y="180" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fe1701e2-464b-4774-9267-3761d44c478d" >
+        <dc:Bounds x="648" y="180" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="b2aaeaa7-b777-4a37-a592-fc9265d7d33a" >
+        <dc:Bounds x="492" y="180" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="StartEvent_1-80bdb4b6-f70d-4dd7-b12b-44843b19facc" >
+        <di:waypoint x="96" y="204" />
+        <di:waypoint x="220" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="80bdb4b6-f70d-4dd7-b12b-44843b19facc-7d406704-2e90-48ff-90b6-62dcbd19d08b" >
+        <di:waypoint x="220" y="205" />
+        <di:waypoint x="376" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="b2aaeaa7-b777-4a37-a592-fc9265d7d33a-fe1701e2-464b-4774-9267-3761d44c478d" >
+        <di:waypoint x="532" y="204" />
+        <di:waypoint x="672" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="7d406704-2e90-48ff-90b6-62dcbd19d08b-b2aaeaa7-b777-4a37-a592-fc9265d7d33a" >
+        <di:waypoint x="376" y="204" />
+        <di:waypoint x="532" y="204" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

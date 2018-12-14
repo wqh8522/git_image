@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="drools_flow_no1" name="userFlowTest" tns:packageName="com.process1" >
+
+    <extensionElements>
+     <tns:import name="com.wqh.drools.jbpm.pojo.Score" />
+     <tns:import name="org.kie.api.runtime.process.CaseAssignment" />
+     <tns:import name="org.kie.api.runtime.process.CaseData" />
+     <tns:import name="com.wqh.drools.jbpm.pojo.Users" />
+    </extensionElements>
+    <!-- nodes -->
+    <startEvent id="66c64c25-b212-499e-9064-6e4a458cd1f1" name="Start"  isInterrupting="false">
+    </startEvent>
+    <businessRuleTask id="50ef4d98-ba4d-4311-9a5c-d844e6af06ff" name="分数" g:ruleFlowGroup="score" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+    <scriptTask id="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" name="优秀" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("优秀=====");</script>
+    </scriptTask>
+    <scriptTask id="00159095-2dc3-434b-9bb5-8724d170c65b" name="良好" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("良好======");</script>
+    </scriptTask>
+    <endEvent id="58dc1f3d-b1c8-470e-aac8-6d9a4cec5727" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <endEvent id="05062374-69dd-4b94-87d3-a7b89224c0e1" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <exclusiveGateway id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" name="Gateway" gatewayDirection="Diverging" >
+    </exclusiveGateway>
+    <scriptTask id="aee75e2f-c435-4262-b313-420deed5b79e" name="及格" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("及格=====");</script>
+    </scriptTask>
+    <scriptTask id="de2f692c-a3d6-410b-ba82-3335938bd35a" name="不及格" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("不及格");</script>
+    </scriptTask>
+    <endEvent id="d0719874-63c0-4df0-9477-edfec49b24fa" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <endEvent id="3f16e7ae-77bc-42f3-9d51-919f5c3236d7" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <scriptTask id="eab0db91-db99-48bf-8398-2d12aab7bb86" name="完美" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("完美");</script>
+    </scriptTask>
+    <endEvent id="31853ac5-a556-4129-a9f0-3fc8ea5d254f" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <businessRuleTask id="da2c2fc4-271d-4d91-abf2-8534c54a758c" name="Rule" g:ruleFlowGroup="name" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+
+    <!-- connections -->
+    <sequenceFlow id="da2c2fc4-271d-4d91-abf2-8534c54a758c-50ef4d98-ba4d-4311-9a5c-d844e6af06ff" sourceRef="da2c2fc4-271d-4d91-abf2-8534c54a758c" targetRef="50ef4d98-ba4d-4311-9a5c-d844e6af06ff" />
+    <sequenceFlow id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" sourceRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" targetRef="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" name="excellent" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >Score(desc == "excellent")</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-00159095-2dc3-434b-9bb5-8724d170c65b" sourceRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" targetRef="00159095-2dc3-434b-9bb5-8724d170c65b" name="good" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >Score(desc == "good")</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e-58dc1f3d-b1c8-470e-aac8-6d9a4cec5727" sourceRef="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" targetRef="58dc1f3d-b1c8-470e-aac8-6d9a4cec5727" />
+    <sequenceFlow id="00159095-2dc3-434b-9bb5-8724d170c65b-05062374-69dd-4b94-87d3-a7b89224c0e1" sourceRef="00159095-2dc3-434b-9bb5-8724d170c65b" targetRef="05062374-69dd-4b94-87d3-a7b89224c0e1" />
+    <sequenceFlow id="50ef4d98-ba4d-4311-9a5c-d844e6af06ff-c503dc5b-5619-4f04-a4ca-d4413aeabfe5" sourceRef="50ef4d98-ba4d-4311-9a5c-d844e6af06ff" targetRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" />
+    <sequenceFlow id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-aee75e2f-c435-4262-b313-420deed5b79e" sourceRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" targetRef="aee75e2f-c435-4262-b313-420deed5b79e" name="pass" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >Score(desc == "pass")</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-de2f692c-a3d6-410b-ba82-3335938bd35a" sourceRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" targetRef="de2f692c-a3d6-410b-ba82-3335938bd35a" name="noPass" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >Score(desc == "noPass")</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="aee75e2f-c435-4262-b313-420deed5b79e-d0719874-63c0-4df0-9477-edfec49b24fa" sourceRef="aee75e2f-c435-4262-b313-420deed5b79e" targetRef="d0719874-63c0-4df0-9477-edfec49b24fa" />
+    <sequenceFlow id="de2f692c-a3d6-410b-ba82-3335938bd35a-3f16e7ae-77bc-42f3-9d51-919f5c3236d7" sourceRef="de2f692c-a3d6-410b-ba82-3335938bd35a" targetRef="3f16e7ae-77bc-42f3-9d51-919f5c3236d7" />
+    <sequenceFlow id="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-eab0db91-db99-48bf-8398-2d12aab7bb86" sourceRef="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" targetRef="eab0db91-db99-48bf-8398-2d12aab7bb86" name="perfect" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >Score(desc == "perfect")</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="eab0db91-db99-48bf-8398-2d12aab7bb86-31853ac5-a556-4129-a9f0-3fc8ea5d254f" sourceRef="eab0db91-db99-48bf-8398-2d12aab7bb86" targetRef="31853ac5-a556-4129-a9f0-3fc8ea5d254f" />
+    <sequenceFlow id="66c64c25-b212-499e-9064-6e4a458cd1f1-da2c2fc4-271d-4d91-abf2-8534c54a758c" sourceRef="66c64c25-b212-499e-9064-6e4a458cd1f1" targetRef="da2c2fc4-271d-4d91-abf2-8534c54a758c" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="drools_flow_no1" >
+      <bpmndi:BPMNShape bpmnElement="66c64c25-b212-499e-9064-6e4a458cd1f1" >
+        <dc:Bounds x="16" y="176" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="50ef4d98-ba4d-4311-9a5c-d844e6af06ff" >
+        <dc:Bounds x="267" y="178" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" >
+        <dc:Bounds x="576" y="20" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="00159095-2dc3-434b-9bb5-8724d170c65b" >
+        <dc:Bounds x="576" y="100" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="58dc1f3d-b1c8-470e-aac8-6d9a4cec5727" >
+        <dc:Bounds x="688" y="20" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="05062374-69dd-4b94-87d3-a7b89224c0e1" >
+        <dc:Bounds x="688" y="100" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5" >
+        <dc:Bounds x="495" y="180" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="aee75e2f-c435-4262-b313-420deed5b79e" >
+        <dc:Bounds x="576" y="180" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="de2f692c-a3d6-410b-ba82-3335938bd35a" >
+        <dc:Bounds x="576" y="260" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="d0719874-63c0-4df0-9477-edfec49b24fa" >
+        <dc:Bounds x="688" y="180" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="3f16e7ae-77bc-42f3-9d51-919f5c3236d7" >
+        <dc:Bounds x="688" y="260" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="eab0db91-db99-48bf-8398-2d12aab7bb86" >
+        <dc:Bounds x="576" y="340" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="31853ac5-a556-4129-a9f0-3fc8ea5d254f" >
+        <dc:Bounds x="688" y="340" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="da2c2fc4-271d-4d91-abf2-8534c54a758c" >
+        <dc:Bounds x="141" y="176" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="da2c2fc4-271d-4d91-abf2-8534c54a758c-50ef4d98-ba4d-4311-9a5c-d844e6af06ff" >
+        <di:waypoint x="181" y="200" />
+        <di:waypoint x="307" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-16dc3a44-b70f-4ba0-b455-9db4c9fbce3e" >
+        <di:waypoint x="519" y="204" />
+        <di:waypoint x="616" y="44" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-00159095-2dc3-434b-9bb5-8724d170c65b" >
+        <di:waypoint x="519" y="204" />
+        <di:waypoint x="616" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="16dc3a44-b70f-4ba0-b455-9db4c9fbce3e-58dc1f3d-b1c8-470e-aac8-6d9a4cec5727" >
+        <di:waypoint x="616" y="44" />
+        <di:waypoint x="712" y="44" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="00159095-2dc3-434b-9bb5-8724d170c65b-05062374-69dd-4b94-87d3-a7b89224c0e1" >
+        <di:waypoint x="616" y="124" />
+        <di:waypoint x="712" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="50ef4d98-ba4d-4311-9a5c-d844e6af06ff-c503dc5b-5619-4f04-a4ca-d4413aeabfe5" >
+        <di:waypoint x="307" y="202" />
+        <di:waypoint x="519" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-aee75e2f-c435-4262-b313-420deed5b79e" >
+        <di:waypoint x="519" y="204" />
+        <di:waypoint x="616" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-de2f692c-a3d6-410b-ba82-3335938bd35a" >
+        <di:waypoint x="519" y="204" />
+        <di:waypoint x="616" y="284" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="aee75e2f-c435-4262-b313-420deed5b79e-d0719874-63c0-4df0-9477-edfec49b24fa" >
+        <di:waypoint x="616" y="204" />
+        <di:waypoint x="712" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="de2f692c-a3d6-410b-ba82-3335938bd35a-3f16e7ae-77bc-42f3-9d51-919f5c3236d7" >
+        <di:waypoint x="616" y="284" />
+        <di:waypoint x="712" y="284" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="c503dc5b-5619-4f04-a4ca-d4413aeabfe5-eab0db91-db99-48bf-8398-2d12aab7bb86" >
+        <di:waypoint x="519" y="204" />
+        <di:waypoint x="616" y="364" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="eab0db91-db99-48bf-8398-2d12aab7bb86-31853ac5-a556-4129-a9f0-3fc8ea5d254f" >
+        <di:waypoint x="616" y="364" />
+        <di:waypoint x="712" y="364" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="66c64c25-b212-499e-9064-6e4a458cd1f1-da2c2fc4-271d-4d91-abf2-8534c54a758c" >
+        <di:waypoint x="40" y="200" />
+        <di:waypoint x="181" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

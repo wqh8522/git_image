@@ -4,8 +4,8 @@ import com.wqh.springboot.drools.pojo.Users
 
 rule "testDrools"
     when
-//        Users(name == 10)
-        eval(true)
+        Users(name == 10)
+//        eval(true)
     then
 //    System.out.println("规则被触发，name="+user.getName());
 end

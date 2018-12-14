@@ -1,0 +1,40 @@
+package com.score
+
+
+import com.wqh.drools.jbpm.pojo.Users
+import com.wqh.drools.jbpm.pojo.Score
+import com.wqh.drools.jbpm.pojo.Credit
+import com.wqh.drools.jbpm.pojo.CreditObject
+
+
+rule "score111"
+    when
+     	score:Score(score==10)
+    then
+  		 System.out.println(score.getScore()+"====================");
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"10");
+    	creditObject.setValue("10");
+    	insert(creditObject);
+end
+
+rule "score222"
+    when
+     	score:Score(score==50)
+    then
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"50");
+    	creditObject.setValue("50");
+    	insert(creditObject);
+end
+
+
+rule "score333"
+    when
+     	score:Score(score==100)
+    then
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"100");
+    	creditObject.setValue("100");
+    	insert(creditObject);
+end
