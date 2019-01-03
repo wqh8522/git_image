@@ -22,19 +22,24 @@ public class ProcessTest1 {
 		Users users = new Users();
 		users.setName("wqh111");
 		Resource bpmnRe = ResourceFactory.newClassPathResource("com/process/TestProcess.bpmn",ProcessTest1.class);
-		Resource drlRe1 = ResourceFactory.newClassPathResource("com/process/testProcess.drl",ProcessTest1.class);
+//		Resource drlRe1 = ResourceFactory.newClassPathResource("com/process/testProcess.drl",ProcessTest1.class);
+		Resource drlRe1 = ResourceFactory.newClassPathResource("com/process/test/test1.drl",ProcessTest1.class);
+		Resource drlRe2 = ResourceFactory.newClassPathResource("com/process/test/test2.drl",ProcessTest1.class);
+		Resource drlRe3 = ResourceFactory.newClassPathResource("com/process/test/test3.drl",ProcessTest1.class);
 		
 		KieHelper kieHelper = new KieHelper();
 		
 		kieHelper.addResource(bpmnRe,ResourceType.BPMN2);
 		kieHelper.addResource(drlRe1,ResourceType.DRL);
+		kieHelper.addResource(drlRe2,ResourceType.DRL);
+		kieHelper.addResource(drlRe3,ResourceType.DRL);
 		KieBase kieBase = kieHelper.build() ;
 
         KieSession kieSession = kieBase.newKieSession();
         FactHandle factHandle = kieSession.insert(users);
 
         kieSession.startProcess("com.process.TestProcess");
-        kieSession.fireAllRules();
+//        kieSession.fireAllRules();
         QueryResults results = kieSession.getQueryResults("list all credits from working memory");
         for(QueryResultsRow row : results){
             Credit credit = (Credit) row.get("credit");

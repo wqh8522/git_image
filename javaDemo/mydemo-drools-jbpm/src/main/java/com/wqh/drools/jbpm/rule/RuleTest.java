@@ -16,7 +16,7 @@ import com.wqh.drools.jbpm.pojo.Users;
 
 public class RuleTest {
 
-//	@Test
+	@Test
 	public void testRule() {
 		
 		Resource userDrl = ResourceFactory.newClassPathResource("com/rule/credit/creditRuleTest.drl",RuleTest.class);
