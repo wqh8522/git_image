@@ -32,6 +32,12 @@ Drools 主要分为两个部分：一是 Drools 规则，二是 Drools 规则的
 
 ![](https://raw.githubusercontent.com/wqh8522/my_note/pic/drools/JBossDrools.png)
 
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/java/LHS-%E5%8F%98%E9%87%8F%E5%8C%B9%E9%85%8D.png)
+
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/java/LHS%E6%9D%A1%E4%BB%B6%E5%85%83%E7%B4%A0.png)
+
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/java/LHS%E5%85%B6%E4%BB%96%E6%9D%A1%E4%BB%B6%E7%BA%A6%E6%9D%9F.png)
+
 
 
 ![1543137207844](C:\Users\wanqh\AppData\Roaming\Typora\typora-user-images\1543137207844.png)
