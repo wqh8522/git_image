@@ -60,6 +60,8 @@ RHS /*one or more actions*/
 
 ## Rete网络
 
+![](https://img-blog.csdn.net/20161225123805084?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjM3MzgxNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 Rete算法的编译结果是规则集对应的Rete网络，Rete网络是一个事实（fact）可以在其中流动的图。
 
 Rete网络的节点可以分四类：根节点（root）、类型节点（typenode）、alpha节点、beta节点，其中根节点是一个虚拟节点，是构建Rete网络的入口；类型节点存储事实的各种类型，各个事实从对应的类型节点进入rete网络。
@@ -196,4 +198,72 @@ end
 
 ​       ![](https://raw.githubusercontent.com/wqh8522/my_note/pic/drools%20flow/rete-network.png)
 
+上图（图a和图b），他们的左边都是beta-network，右边都是 alpha-network, 圆圈是 join-node。右边的 alpha-network 是根据事实库和规则条件构建的，其中除 alpha-network 节点的节点都是根据每一条规则条件的模式 , 从事实库中 match 过来的，即在编译构建网络的过程中静态建立的。只要事实库是稳定的，RETE 算法的执行效率应该是非常高的，其原因就是已经通过静态的编译，构建了 alpha-network。左边的 beta-network 表现出了 rules 的内容，其中 p1,p2,p3 共享了许多 BetaMemory 和 join-node, 这样能加快匹配速度。
+
 ## Rete算法匹配过程
+
+1. 对于每个事实，通过select操作进行过滤，使事实沿着rete网络达到合适的Alpha节点
+2. 对于收到的每一个Alpha节点，用Project（投影操作）将那些适当的变量绑定分离出来，使各个新的变量绑定集沿 rete 网到达适当的 bete 节点。
+3. 对于收到新的变量绑定的beta节点，使用Project操作产生新的绑定集，是这些新的变量绑定沿rete网络至下一个beta节点以至最后一个Project。
+4. 对于每条规则，用Project操作将结论实例化所需的绑定分离出来。
+
+如果把 rete 算法类比到关系型数据库操作，则事实集合就是一个关系，每条规则就是一个查询，再将每个事实绑定到每个模式上的操作看作一个 Select 操作，记一条规则为 P，规则中的模式为 c1,c2,…,ci, Select 操作的结果记为 r(ci), 则规则 P 的匹配即为 `r(c1)◇r(c2)◇…◇(rci)`。其中◇表示关系的连接（Join）操作。
+
+Rete 网络的连接（Join）和投影 (Project) 和对数据库的操作形象:
+
+![](https://raw.githubusercontent.com/wqh8522/my_note/pic/drools%20flow/joinandproject.png)
+
+
+
+##  运行时执行
+
+WME ：存储区储存的最小单位是工作存储区元素（Working Memory Element，简称WME），WME是为事实建立的元素，是用于和非根结点代表的模式进行匹配的元素。
+
+Token：是WME的列表，包含有多个WME，（在Forgy的论文中，把Token看成是WME的列表或者单个WME，为了阐述方便，本文将把Token只看成WME的列表）
+
+1. 如果WME的类型和根节点的后继节点TypeNode（Alpha节点的一种）所指定的类型相同，则会将该事实保存在TypeNode节点对应的Alpha存储区，该WME被传到后继节点继续匹配，否则会放弃该WME的后续匹配；
+
+> TypeNode存储： 每次一个AlphaNode被加到一个 ObjectTypeNode的时候，就以字面值（literal value）也就是file 作为key，以AlphaNode作为value加入HashMap。当一个新的实例进入ObjectTypeNode的时候，不用传递到每 一个AlphaNode，它可以直接从HashMap中获得正确的AlphaNode，避免了不必要的字面检查。
+
+2. 如果WME被传递到alpha节点，则会检查WME是否和该节点对应的模式相匹配，若匹配，则会将该事实保存在该alpha节点对应的存储区中，改WME被传递到后继节点继续匹配，否则会放弃该WME的后续匹配；
+
+>alpha 存储：检测WME是否和该结点对应的模式相匹配，若匹配，则会将该事实保存在该alpha结点对应的存储区中，该WME被传递到后继结点继续匹配
+
+3. 如果WME被传递到beta结点的右端，则会加入到该beta结点的right存储区，并和left存储区中的Token进行匹配（匹配动作根据beta结点的类型进行，例如：join，projection，selection），匹配成功，则会将该WME加入到Token中，然后将Token传递到下一个结点，否则会放弃该WME的后续匹配；
+
+>bate存储区：
+>
+>每个非根结点都有一个存储区。其中1-input（alpha）结点有alpha存储区和一个输入口；
+>
+>2-input（bate）结点有left存储区和right存储区和左右两个输入口，其中left存储区是beta存储区，right存储区是alpha存储区。存储区储存的最小单位是工作存储区元素（Working Memory Element，简称WME），WME是为事实建立的元素，是用于和非根结点代表的模式进行匹配的元素。
+
+4. 如果Token被传递到beta结点的左端，则会加入到该beta结点的left存储区，并和right存储区中的WME进行匹配（匹配动作根据beta结点的类型进行，例如：join，projection，selection），匹配成功，则该Token会封装匹配到的WME形成新的Token，传递到下一个结点，否则会放弃该Token的后续匹配；
+
+5. 如果WME被传递到beta结点的左端，将WME封装成仅有一个WME元素的WME列表做为Token，然后按照（4）所示的方法进行匹配；
+
+6. 如果Token传递到终结点，则和该根结点对应的规则被激活，建立相应的Activation，并存储到Agenda当中，等待激发。
+
+7. 如果WME被传递到终结点，将WME封装成仅有一个WME元素的WME列表做为Token，然后按照（6）所示的方法进行匹配；
+
+以上是RETE算法对于不同的结点，来进行WME或者token和结点对应模式的匹配的过程。
+
+## Rete算法优缺点
+
+### Rete特点
+
+- Rete 算法是一种启发式算法，不同规则之间往往含有相同的模式，因此在 beta-network 中可以共享 BetaMemory 和 betanode。如果某个 betanode 被 N 条规则共享，则算法在此节点上效率会提高 N 倍。
+-  Rete 算法由于采用 AlphaMemory 和 BetaMemory 来存储事实，当事实集合变化不大时，保存在 alpha 和 beta 节点中的状态不需要太多变化，避免了大量的重复计算，提高了匹配效率。
+- 从 Rete 网络可以看出，Rete 匹配速度与规则数目无关，这是因为事实只有满足本节点才会继续向下沿网络传递。
+
+### Rete缺点
+
+- 事实的删除与事实的添加顺序相同, 除了要执行与事实添加相同的计算外, 还需要执行查找, 开销很高
+- RETE 算法使用了Beta存储区存储已计算的中间结果, 以牺牲空间换取时间, 从而加快系统的速度。然而β存储区根据规则的条件与事实的数目而成指数级增长, 所以当规则与事实很多时, 会耗尽系统资源 
+
+### 建议
+
+- 容易变化的规则尽量置后匹配，可以减少规则的变化带来规则库的变化。
+- 约束性较为通用或较强的模式尽量置前匹配，可以避免不必要的匹配。
+- 针对 Rete 算法内存开销大和事实增加删除影响效率的问题，技术上应该在 alpha 内存和 beata 内存中，只存储指向内存的指针，并对指针建里索引（可用 hash 表或者非平衡二叉树）。
+- Rete 算法 JoinNode 可以扩展为 AndJoinNode 和 OrJoinNode，两种节点可以再进行组合
+
