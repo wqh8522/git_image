@@ -10,7 +10,7 @@ rule "cheddar"
 when
     Cheese( $cheddar : name == "cheddar" )
     $person : Person( favouriteCheese == $cheddar )
-    eval( $person.getName() == $cheddar )
+    //eval( $person.getName() == $cheddar )
 then
     System.out.println( $person.getName() + " likes cheddar" );
 end
@@ -19,6 +19,24 @@ rule "cheddar1"
 when
     Cheese( $cheddar : name == "cheddar" )
     $person : Person( favouriteCheese != $cheddar )
+then
+    System.out.println( $person.getName() + " does not like cheddar" );
+end
+
+
+rule "cheddar2"
+when
+    Cheese( $cheddar : name != "cheddar" )
+    $person : Person( favouriteCheese == $cheddar )
+then
+    System.out.println( $person.getName() + " does not like cheddar" );
+end
+
+
+rule "cheddar3"
+when
+    Cheese( $cheddar : name != "cheddar" )
+    $person : Person( favouriteCheese == $cheddar )
 then
     System.out.println( $person.getName() + " does not like cheddar" );
 end

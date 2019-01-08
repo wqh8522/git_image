@@ -1,0 +1,54 @@
+//created on: 2018-12-28
+package test1
+
+
+import com.wqh.drools.jbpm.pojo.Users
+import com.wqh.drools.jbpm.pojo.Score
+import com.wqh.drools.jbpm.pojo.CreditObject
+import com.wqh.drools.jbpm.pojo.Credit
+
+query "list all credits from working memory"
+credit : Credit()
+end
+
+
+
+
+rule "user111"
+	ruleflow-group "user"
+    when
+       $user:Users(name == "wqh111")
+    then
+        System.out.println($user.getName()+"====================");
+        Score score = new Score();
+        score.setName($user.getName());
+        score.setScore(10);
+        insert(score);
+end
+
+
+
+
+rule "score111"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==10)
+    then
+  		 System.out.println(score.getScore()+"====================");
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"10");
+    	creditObject.setValue("10");
+    	insert(creditObject);
+end
+
+
+
+rule "creditObject111"
+    ruleflow-group "creditObject"
+    when
+        creditObject:CreditObject(value == "10")
+    then
+   		System.out.println(creditObject.getUuid()+"========creditObject:CreditObject===========");
+        Credit credit = new Credit(creditObject.getUuid(),creditObject.getValue());
+        insert(credit);
+end

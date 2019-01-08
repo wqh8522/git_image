@@ -1,0 +1,45 @@
+//created on: 2018-12-28
+package test3
+
+
+import com.wqh.drools.jbpm.pojo.Users
+import com.wqh.drools.jbpm.pojo.Score
+import com.wqh.drools.jbpm.pojo.CreditObject
+import com.wqh.drools.jbpm.pojo.Credit
+
+
+
+
+rule "user333"
+ 	ruleflow-group "user"
+     when
+        $user:Users(name == "wqh333")
+     then
+         Score score = new Score();
+         score.setName($user.getName());
+         score.setScore(100);
+         insert(score);
+ end
+
+
+rule "score333"
+	ruleflow-group  "score"
+    when
+     	score:Score(score==100)
+    then
+    	CreditObject creditObject = new CreditObject();
+    	creditObject.setUuid(score.getName()+"100");
+    	creditObject.setValue("100");
+    	insert(creditObject);
+end
+
+
+rule "creditObject333"
+    ruleflow-group "creditObject"
+    when
+        creditObject:CreditObject(value == "100")
+    then
+        Credit credit = new Credit(creditObject.getUuid(),creditObject.getValue());
+        insert(credit);
+end
+
