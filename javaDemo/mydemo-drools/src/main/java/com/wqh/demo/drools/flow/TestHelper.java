@@ -57,12 +57,12 @@ public class TestHelper {
 		kieFileSystem.write(drlRe1);
 		//KieBuilder是KieModule中包含的资源的构建者
 		KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
+		
 		//构建KieModule中包含的所有KieBase
 		kieBuilder.buildAll();
 
-		ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
 
-		KieContainer kieContainer = kieServices.newKieContainer(releaseId);
+		KieContainer kieContainer = kieServices.getKieClasspathContainer();
 		KieSession kieSession = kieContainer.newKieSession();
 
 		kieSession.insert(c);
