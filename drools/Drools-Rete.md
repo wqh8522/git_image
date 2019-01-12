@@ -267,3 +267,14 @@ Token：是WME的列表，包含有多个WME，（在Forgy的论文中，把Toke
 - 针对 Rete 算法内存开销大和事实增加删除影响效率的问题，技术上应该在 alpha 内存和 beata 内存中，只存储指向内存的指针，并对指针建里索引（可用 hash 表或者非平衡二叉树）。
 - Rete 算法 JoinNode 可以扩展为 AndJoinNode 和 OrJoinNode，两种节点可以再进行组合
 
+## Drools中的Rete
+
+### ReteOO
+
+ReteOO是Drools在Rete算法基础上对Rete算法的功能增强：
+
+- 节点共享：共享了Alpha和Bate节点
+- Alpha索引：具有许多子节点的Alpha节点使用散列查找机制来避免测试每个结果
+- Beta索引：Join、Not和Exit节点使用散列索引其内存，以减少相等检查的连接尝试。
+- 基于树的图：加入
+
