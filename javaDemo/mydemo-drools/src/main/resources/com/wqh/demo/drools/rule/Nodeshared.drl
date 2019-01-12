@@ -1,0 +1,43 @@
+//created on: 2019-1-3
+package node
+
+dialect "mvel"
+
+import com.wqh.demo.drools.pojo.Cheese
+import com.wqh.demo.drools.pojo.Person
+
+rule cheddar
+when
+    $cheddar : Cheese( $cheddarName : name == "cheddar" )
+    $person : Person( favouriteCheese == $cheddar )
+    //eval( $person.getName() == $cheddar )
+then
+    System.out.println( $person.getName() + " likes cheddar" );
+end
+
+rule cheddar1
+when
+    $cheddar : Cheese( $cheddarNaame : name == "cheddar" )
+    $person : Person( favouriteCheese != $cheddar )
+then
+    System.out.println( $cheddar + " does not like cheddar1" );
+    System.out.println( $person.getName() + " does not like cheddar1" );
+end
+
+
+rule cheddar2
+when
+    $cheddar : Cheese( $cheddarName : name != "cheddar" )
+    $person : Person( favouriteCheese == $cheddar )
+then
+    System.out.println( $person.getName() + " does not like cheddar2" );
+end
+
+
+rule cheddar3
+when
+    $cheddar : Cheese( $cheddarName : name != "cheddar" )
+    $person : Person( favouriteCheese != $cheddar )
+then
+    System.out.println( $person.getName() + " does not like cheddar2" );
+end
