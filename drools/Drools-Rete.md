@@ -74,11 +74,11 @@ Rete网络的根节点，所有对象通过根节点进入Rete网络。根节点
 
 ### ObejctTypeNode
 
-对象类型节点，保证所传入的对象只会进入自己类型所在的网络，提高工作效率。ObjectTypeNode向播到`AlphaNodes`、`LeftInputAdapterNodes`和`BetaNodes`。
+对象类型节点，保证所传入的对象只会进入自己类型所在的网络，提高工作效率。ObjectTypeNode向下传播到`AlphaNodes`、`LeftInputAdapterNodes`和`BetaNodes`。
 
 ![](https://raw.githubusercontent.com/wqh8522/my_note/pic/drools%20flow/ObjectTypeNode.png)
 
-<span style="color:red">在Drools中，当一个对象insert时，会从一个Map中查找，如果Map中不存在，则扫描所有ObectTypeNode，查找它在列表中缓存有效的匹配项。</span>
+<span style="color:red">在Drools中，当一个对象声明时，会从一个Map中查找，如果Map中不存在，则扫描所有ObectTypeNode，查找它在列表中缓存有效的匹配项。</span>
 
 ```java
 //ObjectTypeConfigurationRegistry类
@@ -182,7 +182,9 @@ end
 
 2. 加入一条规则
 
-   > a. 取出规则中的一个模式(模式就是规则中的最小一个匹配项，如：age>10,age<20；那么age>10就是一个模式，age<20是另一个模式。)；检查模式中的参数类型，如果是新类型，则加入一个类型节点。b. 检查模式对应的Alpha节点是否已存在，如果存在则记录节点位置，如果没有则将模式作为一个Alpha节点加入到网络中，同时根据Alpha节点的模式建立Alpha内存表；
+   > a. 取出规则中的一个模式(模式就是规则中的最小一个匹配项，如：age>10,age<20；那么age>10就是一个模式，age<20是另一个模式。)；检查模式中的参数类型，如果是新类型，则加入一个类型节点。
+   >
+   > b. 检查模式对应的Alpha节点是否已存在，如果存在则记录节点位置，如果没有则将模式作为一个Alpha节点加入到网络中，同时根据Alpha节点的模式建立Alpha内存表；
    >
    > c. 重复b，直到所有模式处理完毕；
    >
@@ -194,7 +196,7 @@ end
 
 3. 重复2直到所有规则处理完毕；
 
-执行忘上述步骤，建立的Rete网络：
+执行完上述步骤，建立的Rete网络：
 
 ​       ![](https://raw.githubusercontent.com/wqh8522/my_note/pic/drools%20flow/rete-network.png)
 
